@@ -77,6 +77,7 @@ namespace HTML_Editor.Components
         public void ChgColorKeywords()
         {
             int position = SelectionStart;
+
             for (int i = 0; i < KeywordTable.Keyword.Length; i++)
             {
                 Regex regex = new(KeywordTable.Pattern[i]);
@@ -87,6 +88,7 @@ namespace HTML_Editor.Components
 
                     MatchCollection test1 = regex.Matches(match.Value);
                     string test = test1[^1].Groups[2].Value;
+
                     this.Select(match.Index + a, test != "" ? test.Length : match.Length - b);
                     this.SelectionColor = Color.FromName(KeywordTable.Color[i]);
                 }

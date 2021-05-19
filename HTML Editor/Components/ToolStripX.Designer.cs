@@ -209,7 +209,7 @@ namespace HTML_Editor.Components
                 {
                     isSaved = true;
                     path = file.FileName;
-                }
+        }
             }
 
             if (result == System.Windows.Forms.DialogResult.OK && path.Length > 0)
