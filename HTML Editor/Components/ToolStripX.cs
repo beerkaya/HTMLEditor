@@ -14,10 +14,10 @@ namespace HTML_Editor.Components
     {
         //public OpenFileDialog openFile { get; set; }
         //public SaveFileDialog saveFile { get; set; }
-        private RichTextBoxX richTextBoxX;
-        public ToolStripX(RichTextBoxX richTextBoxX)
+        private Form1 HTMLEdt;
+        public ToolStripX(Form1 HTMLEdt)
         {
-            this.richTextBoxX = richTextBoxX;
+            this.HTMLEdt = HTMLEdt;
             InitializeComponent();
         }
     }

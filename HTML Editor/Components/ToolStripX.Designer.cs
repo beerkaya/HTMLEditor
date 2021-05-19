@@ -96,6 +96,7 @@ namespace HTML_Editor.Components
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(52, 40);
             this.saveToolStripButton.Text = "&Save";
+            this.saveToolStripButton.Enabled = false;
             this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
             // 
             // saveAsToolStripButton
@@ -187,13 +188,11 @@ namespace HTML_Editor.Components
             file.Filter = "HTML Files|*.html|Text Files|*.txt|All files|*.*";
             if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK && file.FileName.Length > 0)
             {
-                richTextBoxX.Text = File.ReadAllText(file.FileName).ToString();
-                richTextBoxX.SelectionStart = richTextBoxX.Text.Length;
+                HTMLEdt.richTextBoxX.Text = File.ReadAllText(file.FileName).ToString();
+                HTMLEdt.richTextBoxX.SelectionStart = HTMLEdt.richTextBoxX.Text.Length;
             }
         }
 
-        private bool isSaved = false;
-        private string path = "";
         private void saveToolStripButton_Click(object sender, System.EventArgs e)
         {
             DialogResult result = DialogResult.Cancel;
@@ -202,20 +201,32 @@ namespace HTML_Editor.Components
             file.DefaultExt = "*.html";
             file.Filter = "HTML Files|*.html|Text Files|*.txt";
 
-            if (!isSaved)
+            if (!HTMLEdt.isSavedBefore)
             {
                 result = file.ShowDialog();
                 if (result == System.Windows.Forms.DialogResult.OK && file.FileName.Length > 0)
                 {
-                    isSaved = true;
-                    path = file.FileName;
-        }
+                    HTMLEdt.isSavedBefore = true;
+                    HTMLEdt.path = file.FileName;
+                }
             }
 
-            if (result == System.Windows.Forms.DialogResult.OK && path.Length > 0)
-                File.WriteAllText(path, richTextBoxX.Text.ToString());
-            else if (path.Length > 0)
-                File.WriteAllText(path, richTextBoxX.Text.ToString());
+            if (result == System.Windows.Forms.DialogResult.OK && HTMLEdt.path.Length > 0)
+            {
+                File.WriteAllText(HTMLEdt.path, HTMLEdt.richTextBoxX.Text.ToString());
+                HTMLEdt.isSaved = true;
+
+                this.saveToolStripButton.Enabled = false;
+                HTMLEdt.menuStripX.saveMenuStrip.Enabled = false;
+            }
+            else if (HTMLEdt.path.Length > 0)
+            {
+                File.WriteAllText(HTMLEdt.path, HTMLEdt.richTextBoxX.Text.ToString());
+                HTMLEdt.isSaved = true;
+
+                this.saveToolStripButton.Enabled = false;
+                HTMLEdt.menuStripX.saveMenuStrip.Enabled = false;
+            }
         }
         private void saveAsToolStripButton_Click(object sender, System.EventArgs e)
         {
@@ -226,21 +237,22 @@ namespace HTML_Editor.Components
 
             if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK && file.FileName.Length > 0)
             {
-                File.WriteAllText(file.FileName, richTextBoxX.Text.ToString());
-                path = file.FileName;
+                File.WriteAllText(file.FileName, HTMLEdt.richTextBoxX.Text.ToString());
+                HTMLEdt.path = file.FileName;
+                HTMLEdt.isSaved = true;
             }
         }
         private void cutToolStripButton_Click(object sender, System.EventArgs e)
         {
-            richTextBoxX.Cut();
+            HTMLEdt.richTextBoxX.Cut();
         }
         private void copyToolStripButton_Click(object sender, System.EventArgs e)
         {
-            richTextBoxX.Copy();
+            HTMLEdt.richTextBoxX.Copy();
         }
         private void pasteToolStripButton_Click(object sender, System.EventArgs e)
         {
-            richTextBoxX.Paste();
+            HTMLEdt.richTextBoxX.Paste();
         }
         private void helpToolStripButton_Click(object sender, System.EventArgs e)
         {
@@ -252,7 +264,7 @@ namespace HTML_Editor.Components
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton newToolStripButton;
         private System.Windows.Forms.ToolStripButton openToolStripButton;
-        private System.Windows.Forms.ToolStripButton saveToolStripButton;
+        public System.Windows.Forms.ToolStripButton saveToolStripButton;
         private System.Windows.Forms.ToolStripButton saveAsToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripButton cutToolStripButton;

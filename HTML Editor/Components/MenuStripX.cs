@@ -11,8 +11,10 @@ namespace HTML_Editor.Components
 {
     public partial class MenuStripX : UserControl
     {
-        public MenuStripX()
+        private Form1 HTMLEdt;
+        public MenuStripX(Form1 HTMLEdt)
         {
+            this.HTMLEdt = HTMLEdt;
             InitializeComponent();
         }
     }

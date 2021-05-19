@@ -33,9 +33,9 @@ namespace HTML_Editor
         {
             this.components = new System.ComponentModel.Container();
             HTML_Editor.Components.KeywordTable keywordTable1 = new HTML_Editor.Components.KeywordTable();
-            this.richTextBoxX = new HTML_Editor.Components.RichTextBoxX(this.components);
-            this.menuStripX = new HTML_Editor.Components.MenuStripX();
-            this.toolStripX = new HTML_Editor.Components.ToolStripX(this.richTextBoxX);
+            this.richTextBoxX = new HTML_Editor.Components.RichTextBoxX(this.components, this);
+            this.menuStripX = new HTML_Editor.Components.MenuStripX(this);
+            this.toolStripX = new HTML_Editor.Components.ToolStripX(this);
             this.SuspendLayout();
             // 
             // menuStripX
@@ -90,8 +90,8 @@ namespace HTML_Editor
 
         
 
-        private Components.MenuStripX menuStripX;
-        private Components.ToolStripX toolStripX;
+        public Components.MenuStripX menuStripX { get; set; }
+        public Components.ToolStripX toolStripX { get; set; }
         public Components.RichTextBoxX richTextBoxX { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿
+﻿using System.IO;
+using System.Windows.Forms;
+
 namespace HTML_Editor.Components
 {
     partial class MenuStripX
@@ -85,12 +87,14 @@ namespace HTML_Editor.Components
             this.newMenuStrip.Name = "newMenuStrip";
             this.newMenuStrip.Size = new System.Drawing.Size(313, 48);
             this.newMenuStrip.Text = "New";
+            this.newMenuStrip.Click += new System.EventHandler(this.newMenuStrip_Click);
             // 
             // openMenuStrip
             // 
             this.openMenuStrip.Name = "openMenuStrip";
             this.openMenuStrip.Size = new System.Drawing.Size(313, 48);
             this.openMenuStrip.Text = "Open";
+            this.openMenuStrip.Click += new System.EventHandler(this.openMenuStrip_Click);
             // 
             // toolStripSeparator1
             // 
@@ -103,12 +107,15 @@ namespace HTML_Editor.Components
             this.saveMenuStrip.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveMenuStrip.Size = new System.Drawing.Size(313, 48);
             this.saveMenuStrip.Text = "Save";
+            this.saveMenuStrip.Enabled = false;
+            this.saveMenuStrip.Click += new System.EventHandler(this.saveMenuStrip_Click);
             // 
             // saveAsMenuStrip
             // 
             this.saveAsMenuStrip.Name = "saveAsMenuStrip";
             this.saveAsMenuStrip.Size = new System.Drawing.Size(313, 48);
             this.saveAsMenuStrip.Text = "Save As";
+            this.saveAsMenuStrip.Click += new System.EventHandler(this.saveAsMenuStrip_Click);
             // 
             // toolStripSeparator3
             // 
@@ -121,6 +128,7 @@ namespace HTML_Editor.Components
             this.exitMenuStrip.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.exitMenuStrip.Size = new System.Drawing.Size(313, 48);
             this.exitMenuStrip.Text = "Exit";
+            this.exitMenuStrip.Click += new System.EventHandler(this.exitMenuStrip_Click);
             // 
             // Edit
             // 
@@ -141,6 +149,7 @@ namespace HTML_Editor.Components
             this.undoMenuStrip.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
             this.undoMenuStrip.Size = new System.Drawing.Size(325, 48);
             this.undoMenuStrip.Text = "Undo";
+            this.undoMenuStrip.Click += new System.EventHandler(this.undoMenuStrip_Click);
             // 
             // redoMenuStrip
             // 
@@ -148,6 +157,7 @@ namespace HTML_Editor.Components
             this.redoMenuStrip.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
             this.redoMenuStrip.Size = new System.Drawing.Size(325, 48);
             this.redoMenuStrip.Text = "Redo";
+            this.redoMenuStrip.Click += new System.EventHandler(this.redoMenuStrip_Click);
             // 
             // toolStripSeparator2
             // 
@@ -160,6 +170,7 @@ namespace HTML_Editor.Components
             this.cutMenuStrip.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
             this.cutMenuStrip.Size = new System.Drawing.Size(325, 48);
             this.cutMenuStrip.Text = "Cut";
+            this.cutMenuStrip.Click += new System.EventHandler(this.cutMenuStrip_Click);
             // 
             // copyMenuStrip
             // 
@@ -167,6 +178,7 @@ namespace HTML_Editor.Components
             this.copyMenuStrip.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.copyMenuStrip.Size = new System.Drawing.Size(325, 48);
             this.copyMenuStrip.Text = "Copy";
+            this.copyMenuStrip.Click += new System.EventHandler(this.copyMenuStrip_Click);
             // 
             // pasteMenuStrip
             // 
@@ -174,6 +186,7 @@ namespace HTML_Editor.Components
             this.pasteMenuStrip.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
             this.pasteMenuStrip.Size = new System.Drawing.Size(325, 48);
             this.pasteMenuStrip.Text = "Paste";
+            this.pasteMenuStrip.Click += new System.EventHandler(this.pasteMenuStrip_Click);
             // 
             // Tools
             // 
@@ -188,6 +201,7 @@ namespace HTML_Editor.Components
             this.optionsMenuStrip.Name = "optionsMenuStrip";
             this.optionsMenuStrip.Size = new System.Drawing.Size(261, 48);
             this.optionsMenuStrip.Text = "Options";
+            this.optionsMenuStrip.Click += new System.EventHandler(this.optionsMenuStrip_Click);
             // 
             // Help
             // 
@@ -202,6 +216,7 @@ namespace HTML_Editor.Components
             this.aboutMenuStrip.Name = "aboutMenuStrip";
             this.aboutMenuStrip.Size = new System.Drawing.Size(240, 48);
             this.aboutMenuStrip.Text = "About";
+            this.aboutMenuStrip.Click += new System.EventHandler(this.aboutMenuStrip_Click);
             // 
             // MenuStripX
             // 
@@ -218,11 +233,111 @@ namespace HTML_Editor.Components
         }
 
         #endregion
+
+        #region Component Methods
+
+        private void newMenuStrip_Click(object sender, System.EventArgs e)
+        {
+            new Form1().Show();
+        }
+        private void openMenuStrip_Click(object sender, System.EventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            file.DefaultExt = "*.html";
+            file.Filter = "HTML Files|*.html|Text Files|*.txt|All files|*.*";
+            if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK && file.FileName.Length > 0)
+            {
+                HTMLEdt.richTextBoxX.Text = System.IO.File.ReadAllText(file.FileName).ToString();
+                HTMLEdt.richTextBoxX.SelectionStart = HTMLEdt.richTextBoxX.Text.Length;
+            }
+        }
+        private void saveMenuStrip_Click(object sender, System.EventArgs e)
+        {
+            DialogResult result = DialogResult.Cancel;
+
+            SaveFileDialog file = new SaveFileDialog();
+            file.DefaultExt = "*.html";
+            file.Filter = "HTML Files|*.html|Text Files|*.txt";
+
+            if (!HTMLEdt.isSavedBefore)
+            {
+                result = file.ShowDialog();
+                if (result == System.Windows.Forms.DialogResult.OK && file.FileName.Length > 0)
+                {
+                    HTMLEdt.isSavedBefore = true;
+                    HTMLEdt.path = file.FileName;
+                }
+            }
+
+            if (result == System.Windows.Forms.DialogResult.OK && HTMLEdt.path.Length > 0)
+            {
+                System.IO.File.WriteAllText(HTMLEdt.path, HTMLEdt.richTextBoxX.Text.ToString());
+                HTMLEdt.isSaved = true;
+
+                this.saveMenuStrip.Enabled = false;
+                HTMLEdt.toolStripX.saveToolStripButton.Enabled = false;
+            }
+            else if (HTMLEdt.path.Length > 0)
+            {
+                System.IO.File.WriteAllText(HTMLEdt.path, HTMLEdt.richTextBoxX.Text.ToString());
+                HTMLEdt.isSaved = true;
+
+                this.saveMenuStrip.Enabled = false;
+                HTMLEdt.toolStripX.saveToolStripButton.Enabled = false;
+            }
+        }
+        private void saveAsMenuStrip_Click(object sender, System.EventArgs e)
+        {
+            SaveFileDialog file = new SaveFileDialog();
+            file.DefaultExt = "*.html";
+            file.Filter = "HTML Files|*.html|Text Files|*.txt";
+
+
+            if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK && file.FileName.Length > 0)
+            {
+                System.IO.File.WriteAllText(file.FileName, HTMLEdt.richTextBoxX.Text.ToString());
+                HTMLEdt.path = file.FileName;
+                HTMLEdt.isSaved = true;
+            }
+        }
+        private void exitMenuStrip_Click(object sender, System.EventArgs e)
+        {
+
+        }
+        private void undoMenuStrip_Click(object sender, System.EventArgs e)
+        {
+            HTMLEdt.richTextBoxX.Undo();
+        }
+        private void redoMenuStrip_Click(object sender, System.EventArgs e)
+        {
+            HTMLEdt.richTextBoxX.Redo();
+        }
+        private void cutMenuStrip_Click(object sender, System.EventArgs e)
+        {
+            HTMLEdt.richTextBoxX.Cut();
+        }
+        private void copyMenuStrip_Click(object sender, System.EventArgs e)
+        {
+            HTMLEdt.richTextBoxX.Copy();
+        }
+        private void pasteMenuStrip_Click(object sender, System.EventArgs e)
+        {
+            HTMLEdt.richTextBoxX.Paste();
+        }
+        private void optionsMenuStrip_Click(object sender, System.EventArgs e)
+        {
+            MessageBox.Show("Daha sonra eklenecek..");
+        }
+        private void aboutMenuStrip_Click(object sender, System.EventArgs e)
+        {
+
+        }
+        #endregion
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem File;
         private System.Windows.Forms.ToolStripMenuItem newMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem openMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem saveMenuStrip;
+        public System.Windows.Forms.ToolStripMenuItem saveMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem saveAsMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem exitMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem Edit;

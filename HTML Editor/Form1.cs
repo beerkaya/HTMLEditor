@@ -18,7 +18,9 @@ namespace HTML_Editor
             InitializeComponent();
         }
 
-        
+        public bool isSaved { get; set; } = true;
+        public bool isSavedBefore { get; set; } = false;
+        public string path { get; set; } = "";
 
         private static readonly string[,] table = new[,]
         {

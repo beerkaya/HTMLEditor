@@ -15,8 +15,11 @@ namespace HTML_Editor.Components
     public partial class RichTextBoxX : RichTextBox
     {
         public KeywordTable KeywordTable { get; set; } = new();
-        public RichTextBoxX(IContainer container)
+        private Form1 HTMLEdt;
+        public RichTextBoxX(IContainer container, Form1 HTMLEdt)
         {
+            this.HTMLEdt = HTMLEdt;
+
             container.Add(this);
 
             InitializeComponent();
@@ -64,6 +67,10 @@ namespace HTML_Editor.Components
         }
         private void RichTextBoxX_TextChanged(object sender, EventArgs e)
         {
+            HTMLEdt.isSaved = false;
+            HTMLEdt.toolStripX.saveToolStripButton.Enabled = true;
+            HTMLEdt.menuStripX.saveMenuStrip.Enabled = true;
+
             this.Enabled = false;
             this.TextChanged -= RichTextBoxX_TextChanged;
 
