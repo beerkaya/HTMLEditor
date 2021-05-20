@@ -83,9 +83,29 @@ namespace HTML_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap redo1 {
+            get {
+                object obj = ResourceManager.GetObject("redo1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap saveAs {
             get {
                 object obj = ResourceManager.GetObject("saveAs", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap undo1 {
+            get {
+                object obj = ResourceManager.GetObject("undo1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

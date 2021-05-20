@@ -16,6 +16,8 @@ namespace HTML_Editor
         public Form1()
         {
             InitializeComponent();
+
+            
         }
 
         public bool isSaved { get; set; } = true;

@@ -38,15 +38,17 @@ namespace HTML_Editor.Components
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveAsToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.undoToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.redoToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
-
             // 
             // toolStrip
             // 
@@ -57,6 +59,9 @@ namespace HTML_Editor.Components
             this.saveToolStripButton,
             this.saveAsToolStripButton,
             this.toolStripSeparator,
+            this.undoToolStripButton,
+            this.redoToolStripButton,
+            this.toolStripSeparator2,
             this.cutToolStripButton,
             this.copyToolStripButton,
             this.pasteToolStripButton,
@@ -91,12 +96,12 @@ namespace HTML_Editor.Components
             // saveToolStripButton
             // 
             this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveToolStripButton.Enabled = false;
             this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
             this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(52, 40);
             this.saveToolStripButton.Text = "&Save";
-            this.saveToolStripButton.Enabled = false;
             this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
             // 
             // saveAsToolStripButton
@@ -108,6 +113,31 @@ namespace HTML_Editor.Components
             this.saveAsToolStripButton.Size = new System.Drawing.Size(52, 40);
             this.saveAsToolStripButton.Text = "Save As";
             this.saveAsToolStripButton.Click += new System.EventHandler(this.saveAsToolStripButton_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
+            // 
+            // undoToolStripButton
+            // 
+            this.undoToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.undoToolStripButton.Image = global::HTML_Editor.Properties.Resources.undo1;
+            this.undoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.undoToolStripButton.Name = "undoToolStripButton";
+            this.undoToolStripButton.Size = new System.Drawing.Size(52, 40);
+            this.undoToolStripButton.Text = "Undo";
+            this.undoToolStripButton.Click += new System.EventHandler(this.undoToolStripButton_Click);
+            // 
+            // redoToolStripButton
+            // 
+            this.redoToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.redoToolStripButton.Image = global::HTML_Editor.Properties.Resources.redo1;
+            this.redoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.redoToolStripButton.Name = "redoToolStripButton";
+            this.redoToolStripButton.Size = new System.Drawing.Size(52, 40);
+            this.redoToolStripButton.Text = "Redo";
+            this.redoToolStripButton.Click += new System.EventHandler(this.redoToolStripButton_Click);
             // 
             // toolStripSeparator
             // 
@@ -248,6 +278,26 @@ namespace HTML_Editor.Components
                 HTMLEdt.isSaved = true;
             }
         }
+        private void undoToolStripButton_Click(object sender, System.EventArgs e)
+        {
+            HTMLEdt.richTextBoxX.Undo();
+
+            if (!HTMLEdt.richTextBoxX.CanUndo)
+            {
+                this.undoToolStripButton.Enabled = false;
+                HTMLEdt.menuStripX.undoMenuStrip.Enabled = false;
+            }
+        }
+        private void redoToolStripButton_Click(object sender, System.EventArgs e)
+        {
+            HTMLEdt.richTextBoxX.Redo();
+
+            if (!HTMLEdt.richTextBoxX.CanRedo)
+            {
+                this.redoToolStripButton.Enabled = false;
+                HTMLEdt.menuStripX.redoMenuStrip.Enabled = false;
+            }
+        }
         private void cutToolStripButton_Click(object sender, System.EventArgs e)
         {
             HTMLEdt.richTextBoxX.Cut();
@@ -272,6 +322,9 @@ namespace HTML_Editor.Components
         private System.Windows.Forms.ToolStripButton openToolStripButton;
         public System.Windows.Forms.ToolStripButton saveToolStripButton;
         private System.Windows.Forms.ToolStripButton saveAsToolStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        public System.Windows.Forms.ToolStripButton undoToolStripButton;
+        public System.Windows.Forms.ToolStripButton redoToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripButton cutToolStripButton;
         private System.Windows.Forms.ToolStripButton copyToolStripButton;

@@ -73,6 +73,13 @@ namespace HTML_Editor
             //this.richTextBoxX.Size = new System.Drawing.Size(1522, 797);
             this.richTextBoxX.TabIndex = 0;
             this.richTextBoxX.Text = "";
+            //
+            // Undo-Redo Duzenlemeleri
+            //
+            this.toolStripX.undoToolStripButton.Enabled = richTextBoxX.CanUndo;
+            this.toolStripX.redoToolStripButton.Enabled = richTextBoxX.CanRedo;
+            this.menuStripX.undoMenuStrip.Enabled = richTextBoxX.CanUndo;
+            this.menuStripX.redoMenuStrip.Enabled = richTextBoxX.CanRedo;
             // 
             // Form1
             // 

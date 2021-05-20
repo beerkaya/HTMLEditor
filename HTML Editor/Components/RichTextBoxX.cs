@@ -71,6 +71,12 @@ namespace HTML_Editor.Components
             HTMLEdt.toolStripX.saveToolStripButton.Enabled = true;
             HTMLEdt.menuStripX.saveMenuStrip.Enabled = true;
 
+            HTMLEdt.toolStripX.undoToolStripButton.Enabled = this.CanUndo;
+            HTMLEdt.toolStripX.redoToolStripButton.Enabled = this.CanRedo;
+            HTMLEdt.menuStripX.undoMenuStrip.Enabled = this.CanUndo;
+            HTMLEdt.menuStripX.redoMenuStrip.Enabled = this.CanRedo;
+
+
             this.Enabled = false;
             this.TextChanged -= RichTextBoxX_TextChanged;
 

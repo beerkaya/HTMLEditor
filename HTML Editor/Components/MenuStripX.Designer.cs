@@ -348,8 +348,8 @@ namespace HTML_Editor.Components
         private System.Windows.Forms.ToolStripMenuItem saveAsMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem exitMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem Edit;
-        private System.Windows.Forms.ToolStripMenuItem undoMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem redoMenuStrip;
+        public System.Windows.Forms.ToolStripMenuItem undoMenuStrip;
+        public System.Windows.Forms.ToolStripMenuItem redoMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem cutMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem copyMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem pasteMenuStrip;
