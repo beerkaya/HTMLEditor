@@ -308,7 +308,7 @@ namespace HTML_Editor.Components
         }
         private void exitMenuStrip_Click(object sender, System.EventArgs e)
         {
-
+            HTMLEdt.Close();
         }
         private void undoMenuStrip_Click(object sender, System.EventArgs e)
         {

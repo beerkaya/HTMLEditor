@@ -21,8 +21,6 @@ namespace HTML_Editor
             base.Dispose(disposing);
         }
 
-        
-
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -93,13 +91,12 @@ namespace HTML_Editor
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        
 
         public Components.MenuStripX menuStripX { get; set; }
         public Components.ToolStripX toolStripX { get; set; }

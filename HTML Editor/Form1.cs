@@ -16,8 +16,6 @@ namespace HTML_Editor
         public Form1()
         {
             InitializeComponent();
-
-            
         }
 
         public bool isSaved { get; set; } = true;
@@ -57,6 +55,42 @@ namespace HTML_Editor
             }
         }
 
-        
+        private void Form1_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        {
+            if (!this.isSaved)
+            {
+                DialogResult resultQuestion = MessageBox.Show("Do you want to save code?", "Are you Sure?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+                if(resultQuestion == DialogResult.OK)
+                {
+                    DialogResult result = DialogResult.Cancel;
+
+                    SaveFileDialog file = new SaveFileDialog();
+                    file.DefaultExt = "*.html";
+                    file.Filter = "HTML Files|*.html|Text Files|*.txt";
+
+                    if (!this.isSavedBefore)
+                    {
+                        result = file.ShowDialog();
+                        if (result == System.Windows.Forms.DialogResult.OK && file.FileName.Length > 0)
+                        {
+                            this.isSavedBefore = true;
+                            this.path = file.FileName;
+                        }
+                    }
+
+                    if (result == System.Windows.Forms.DialogResult.OK && this.path.Length > 0)
+                    {
+                        System.IO.File.WriteAllText(this.path, this.richTextBoxX.Text.ToString());
+                        this.isSaved = true;
+                    }
+                    else if (this.path.Length > 0)
+                    {
+                        System.IO.File.WriteAllText(this.path, this.richTextBoxX.Text.ToString());
+                        this.isSaved = true;
+                    }
+                }
+            }
+        }
     }
 }
