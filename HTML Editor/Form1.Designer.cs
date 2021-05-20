@@ -83,13 +83,14 @@ namespace HTML_Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             //this.ClientSize = new System.Drawing.Size(1522, 888);
             this.Controls.Add(this.richTextBoxX);
             this.Controls.Add(this.toolStripX);
             this.Controls.Add(this.menuStripX);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "HTMLEditor";
+            this.Text = "HTML Editor";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);

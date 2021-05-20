@@ -30,17 +30,6 @@ namespace HTML_Editor.Components
 
             //this.Selectable = true;
         }
-        //const int WM_SETFOCUS = 0x0007;
-        //const int WM_KILLFOCUS = 0x0008;
-        //[DefaultValue(true)]
-        //public bool Selectable { get; set; }
-        //protected override void WndProc(ref Message m)
-        //{
-        //    if (m.Msg == WM_SETFOCUS && !Selectable)
-        //        m.Msg = WM_KILLFOCUS;
-
-        //    base.WndProc(ref m);
-        //}
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) // finalde editlenecek
         {
             int position = this.SelectionStart;
