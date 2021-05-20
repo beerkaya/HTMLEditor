@@ -43,7 +43,8 @@ namespace HTML_Editor
             this.menuStripX.Dock = System.Windows.Forms.DockStyle.Top;
             this.menuStripX.Location = new System.Drawing.Point(0, 0);
             this.menuStripX.Name = "menuStripX";
-            this.menuStripX.Size = new System.Drawing.Size(1522, 45);
+            this.menuStripX.Size = new System.Drawing.Size(1920, 45);
+            //this.menuStripX.Size = new System.Drawing.Size(1522, 45);
             this.menuStripX.TabIndex = 1;
             this.menuStripX.TabStop = false;
             // 
@@ -52,7 +53,8 @@ namespace HTML_Editor
             this.toolStripX.Dock = System.Windows.Forms.DockStyle.Top;
             this.toolStripX.Location = new System.Drawing.Point(0, 45);
             this.toolStripX.Name = "toolStripX";
-            this.toolStripX.Size = new System.Drawing.Size(1522, 46);
+            this.toolStripX.Size = new System.Drawing.Size(1920, 46);
+            //this.toolStripX.Size = new System.Drawing.Size(1522, 46);
             this.toolStripX.TabIndex = 2;
             this.toolStripX.TabStop = false;
             // 
@@ -67,7 +69,8 @@ namespace HTML_Editor
             this.richTextBoxX.KeywordTable = keywordTable1;
             this.richTextBoxX.Location = new System.Drawing.Point(0, 91);
             this.richTextBoxX.Name = "richTextBoxX";
-            this.richTextBoxX.Size = new System.Drawing.Size(1522, 797);
+            this.richTextBoxX.Size = new System.Drawing.Size(1920, 989);
+            //this.richTextBoxX.Size = new System.Drawing.Size(1522, 797);
             this.richTextBoxX.TabIndex = 0;
             this.richTextBoxX.Text = "";
             // 
@@ -75,7 +78,8 @@ namespace HTML_Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1522, 888);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
+            //this.ClientSize = new System.Drawing.Size(1522, 888);
             this.Controls.Add(this.richTextBoxX);
             this.Controls.Add(this.toolStripX);
             this.Controls.Add(this.menuStripX);

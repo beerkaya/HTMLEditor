@@ -190,6 +190,12 @@ namespace HTML_Editor.Components
             {
                 HTMLEdt.richTextBoxX.Text = File.ReadAllText(file.FileName).ToString();
                 HTMLEdt.richTextBoxX.SelectionStart = HTMLEdt.richTextBoxX.Text.Length;
+
+                this.saveToolStripButton.Enabled = false;
+                HTMLEdt.menuStripX.saveMenuStrip.Enabled = false;
+
+                HTMLEdt.isSavedBefore = true;
+                HTMLEdt.path = file.FileName;
             }
         }
 

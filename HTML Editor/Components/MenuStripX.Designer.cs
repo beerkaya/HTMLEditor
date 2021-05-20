@@ -249,6 +249,12 @@ namespace HTML_Editor.Components
             {
                 HTMLEdt.richTextBoxX.Text = System.IO.File.ReadAllText(file.FileName).ToString();
                 HTMLEdt.richTextBoxX.SelectionStart = HTMLEdt.richTextBoxX.Text.Length;
+
+                this.saveMenuStrip.Enabled = false;
+                HTMLEdt.toolStripX.saveToolStripButton.Enabled = false;
+
+                HTMLEdt.isSavedBefore = true;
+                HTMLEdt.path = file.FileName;
             }
         }
         private void saveMenuStrip_Click(object sender, System.EventArgs e)
@@ -333,6 +339,7 @@ namespace HTML_Editor.Components
 
         }
         #endregion
+
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem File;
         private System.Windows.Forms.ToolStripMenuItem newMenuStrip;
