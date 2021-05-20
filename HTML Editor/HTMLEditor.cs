@@ -11,9 +11,9 @@ using HTML_Editor.Components;
 
 namespace HTML_Editor
 {
-    public partial class Form1 : Form
+    public partial class HTMLEditor : Form
     {
-        public Form1()
+        public HTMLEditor()
         {
             InitializeComponent();
         }

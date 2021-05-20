@@ -1,7 +1,7 @@
 ﻿
 namespace HTML_Editor
 {
-    partial class Form1
+    partial class HTMLEditor
     {
         /// <summary>
         ///  Required designer variable.

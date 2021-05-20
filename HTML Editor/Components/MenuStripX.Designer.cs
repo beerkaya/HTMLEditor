@@ -238,7 +238,7 @@ namespace HTML_Editor.Components
 
         private void newMenuStrip_Click(object sender, System.EventArgs e)
         {
-            new Form1().Show();
+            new HTMLEditor().Show();
         }
         private void openMenuStrip_Click(object sender, System.EventArgs e)
         {
@@ -336,7 +336,7 @@ namespace HTML_Editor.Components
         }
         private void aboutMenuStrip_Click(object sender, System.EventArgs e)
         {
-
+            new CreditDialog().ShowDialog();
         }
         #endregion
 

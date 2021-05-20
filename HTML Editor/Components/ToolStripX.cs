@@ -14,8 +14,8 @@ namespace HTML_Editor.Components
     {
         //public OpenFileDialog openFile { get; set; }
         //public SaveFileDialog saveFile { get; set; }
-        private Form1 HTMLEdt;
-        public ToolStripX(Form1 HTMLEdt)
+        private HTMLEditor HTMLEdt;
+        public ToolStripX(HTMLEditor HTMLEdt)
         {
             this.HTMLEdt = HTMLEdt;
             InitializeComponent();

@@ -209,7 +209,7 @@ namespace HTML_Editor.Components
 
         private void newToolStripButton_Click(object sender, System.EventArgs e)
         {
-            new Form1().Show();
+            new HTMLEditor().Show();
         }
         public void openToolStripButton_Click(object sender, System.EventArgs e)
         {
@@ -312,7 +312,7 @@ namespace HTML_Editor.Components
         }
         private void helpToolStripButton_Click(object sender, System.EventArgs e)
         {
-
+            new CreditDialog().ShowDialog();
         }
 
         #endregion

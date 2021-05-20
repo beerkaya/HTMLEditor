@@ -15,8 +15,8 @@ namespace HTML_Editor.Components
     public partial class RichTextBoxX : RichTextBox
     {
         public KeywordTable KeywordTable { get; set; } = new();
-        private Form1 HTMLEdt;
-        public RichTextBoxX(IContainer container, Form1 HTMLEdt)
+        private HTMLEditor HTMLEdt;
+        public RichTextBoxX(IContainer container, HTMLEditor HTMLEdt)
         {
             this.HTMLEdt = HTMLEdt;
 
