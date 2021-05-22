@@ -125,6 +125,7 @@ namespace HTML_Editor.Components
         }
         /// <summary>
         /// * * * * * * * * * * RENK DEGISTIRME METOTU * * * * * * * * * *
+        ///     * * * * * * * * * * DUZENLENECEKTIR * * * * * * * * * *
         /// </summary>
         public void ChgColorKeywords()
         {
@@ -151,10 +152,12 @@ namespace HTML_Editor.Components
                     int a = !match.Value.Contains("<") ? 0 : match.Value.Contains("/") ? 2 : 1;
                     int b = !match.Value.Contains("<") ? 0 : match.Value.Contains("/") ? 3 : 2;
 
-
+                    // gelen ifade bir kez daha regex e sokuluyor ve attribute yakalanmaya calisiliyor.
+                    // Yakalanan attribute stringe aktariliyor.
                     MatchCollection temp = regex.Matches(match.Value);
                     string attribute = temp[^1].Groups[2].Value;
 
+                    // Renklendirilecek kisim seciliyor ve selectioncolor ile tablodaki rengine gore rengi degistiriliyor.
                     this.Select(match.Index + a, attribute != "" ? attribute.Length : match.Length - b);
                     this.SelectionColor = Color.FromName(KeywordTable.Color[i]);
                 }
@@ -177,10 +180,19 @@ namespace HTML_Editor.Components
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public class KeywordTable
     {
+        /// <summary>
+        /// HTML taglari ve Attribute larini tutan dizi.
+        /// </summary>
         public string[] Keyword { get; set; } = new List<string>().ToArray();
 
+        /// <summary>
+        /// Keyword dizisindeki kelimelerin regex ifadelerini tutan dizi
+        /// </summary>
         public string[] Pattern { get; set; } = new List<string>().ToArray();
 
+        /// <summary>
+        /// Keyword dizisindeki kelimelerin renklerini tutan dizi
+        /// </summary>
         public string[] Color { get; set; } = new List<string>().ToArray();
     }
 }

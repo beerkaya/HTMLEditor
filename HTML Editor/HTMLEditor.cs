@@ -58,6 +58,9 @@ namespace HTML_Editor
             { "height", @"\bheight\b", "red" },
             { "width", @"\bwidth\b", "red" },
             { "href",  @"\bhref\b", "red" },
+
+            // ***** Attribute larin regex design larini gelistirmek icin calisma yapiyorum. Bu mesaji goruyorsaniz vizeye yetismemis demektir. *****
+
         };
 
         /// <summary>
