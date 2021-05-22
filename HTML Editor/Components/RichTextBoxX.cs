@@ -104,19 +104,24 @@ namespace HTML_Editor.Components
             ///         RENK DEGISTIRME ISLEMI
             /// * * * * * * * * * * * * * * * * * * * *
 
-
             // richTextBoxX Disable yapilir..
             this.Enabled = false;
+
             // TextChanged metotu eventten cikarilir.
             this.TextChanged -= RichTextBoxX_TextChanged;
+
             // Renk degistirme metotu calistirilir.
             ChgColorKeywords();
+
             // richTextBox Invalidate edilir.
             this.Invalidate();
+
             // TextChanged metotu evente eklenir.
             this.TextChanged += RichTextBoxX_TextChanged;
+
             // richTextBox Enable yapilir.
             this.Enabled = true;
+
             // richTextBox a focuslanir.
             this.Focus();
 
