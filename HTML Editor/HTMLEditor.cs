@@ -26,7 +26,8 @@ namespace HTML_Editor
 
         /// <summary>
         /// Yazilan kodlarin daha once kaydedilip edilmedigi bilgisini tutar. 
-        /// Daha once kaydedilmisse saveDialog gosterilmez.
+        /// Daha once kaydedilmisse saveDialog gosterilmez. 
+        /// (Aslinda bu property e gerek yok sadece path yeterlidir fakat kod okunabilirligi acisindan boolean bir ifadede ayrica tutulmustur.)
         /// </summary>
         public bool isSavedBefore { get; set; } = false;
 
