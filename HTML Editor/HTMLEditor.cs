@@ -18,10 +18,26 @@ namespace HTML_Editor
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Formda son kayittan sonra duzenleme yapilip yapilmadigi bilgisini tutar. 
+        /// Default degeri true dur. TextChanged oldugunda false olur. Dosya kaydedildiginde true olur.
+        /// </summary>
         public bool isSaved { get; set; } = true;
+
+        /// <summary>
+        /// Yazilan kodlarin daha once kaydedilip edilmedigi bilgisini tutar. 
+        /// Daha once kaydedilmisse saveDialog gosterilmez.
+        /// </summary>
         public bool isSavedBefore { get; set; } = false;
+
+        /// <summary>
+        /// Kaydedilen veya acilan dosyanin dosya yolunu tutar.
+        /// </summary>
         public string path { get; set; } = "";
 
+        /// <summary>
+        /// Renklendirilmek istenen kelimeler, regex ifadeleri ve istenen renkleri tutan tablo.
+        /// </summary>
         private static readonly string[,] table = new[,]
         {
             { "DOCTYPE", @"(<(!DOCTYPE)( html)?>)", "blue" },
@@ -42,11 +58,20 @@ namespace HTML_Editor
             { "width", @"\bwidth\b", "red" },
             { "href",  @"\bhref\b", "red" },
         };
+
+        /// <summary>
+        /// HTMLEditor Formunun Load eventinin metotu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
+            // KeywordTable Sinifinin ogeleri orneklenir.
             richTextBoxX.KeywordTable.Keyword = new string[table.GetLength(0)];
             richTextBoxX.KeywordTable.Pattern = new string[table.GetLength(0)];
             richTextBoxX.KeywordTable.Color = new string[table.GetLength(0)];
+
+            // table daki degerler bu sinifin ilgili dizilerine aktarilir.
             for (int i = 0; i < table.GetLength(0); i++)
             {
                 richTextBoxX.KeywordTable.Keyword[i] = table.GetValue(i, 0).ToString();
@@ -55,23 +80,42 @@ namespace HTML_Editor
             }
         }
 
+        /// <summary>
+        /// HTMLEditor Formunun Closing eventinin metotu. isSaved false ise islem yapilir.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
             if (!this.isSaved)
             {
-                DialogResult resultQuestion = MessageBox.Show("Do you want to save code?", "Are you Sure?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                /// * * * * * * * * * *
+                /// Bir MessageBox olusturuluyor.
+                /// MessageBox tan donen sonuc OK ise if blogu calisiyor.
+                /// * * * * * * * * * *
 
-                if(resultQuestion == DialogResult.OK)
+                if(MessageBox.Show("Do you want to save code?", "Are you Sure?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
+                    /// * * * * * * * * * *
+                    /// DialogResult tipinde bir result olusturuluyor. Degeri false durumu ifade eden Cancel a esitleniyor.
+                    /// SaveFileDialog tipinde bir file nesnesi olusturuluyor ve default dosya tipi ile diger dosya tipleri belirleniyor.
+                    /// * * * * * * * * * *
                     DialogResult result = DialogResult.Cancel;
 
                     SaveFileDialog file = new SaveFileDialog();
                     file.DefaultExt = "*.html";
                     file.Filter = "HTML Files|*.html|Text Files|*.txt";
 
+                    // Dosya daha once kaydedilmediyse saveDialog gosterilir ve kaydedilecek yer kullaniciya sorulur.
                     if (!this.isSavedBefore)
                     {
+                        // Dialogtan donen sonuc result a aktarilir.
                         result = file.ShowDialog();
+
+                        /// * * * * * * * * * *
+                        /// result OK ise ve gecerli bir fileName varsa,
+                        /// isSavedBefore true yapilir ve fileName path degiskenine aktarilir.
+                        /// * * * * * * * * * *
                         if (result == System.Windows.Forms.DialogResult.OK && file.FileName.Length > 0)
                         {
                             this.isSavedBefore = true;
@@ -79,12 +123,11 @@ namespace HTML_Editor
                         }
                     }
 
-                    if (result == System.Windows.Forms.DialogResult.OK && this.path.Length > 0)
-                    {
-                        System.IO.File.WriteAllText(this.path, this.richTextBoxX.Text.ToString());
-                        this.isSaved = true;
-                    }
-                    else if (this.path.Length > 0)
+                    /// * * * * * * * * * *
+                    /// path degiskeni gecerli bir degere sahipse yazilan text kaydedilir ve isSaved true yapilir.
+                    /// Kaydetmeyi saglayan menuStrip ve toolStrip false yapilir.
+                    /// * * * * * * * * * *
+                    if (this.path.Length > 0)
                     {
                         System.IO.File.WriteAllText(this.path, this.richTextBoxX.Text.ToString());
                         this.isSaved = true;

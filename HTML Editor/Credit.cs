@@ -13,33 +13,58 @@ namespace HTML_Editor
 {
     public partial class CreditDialog : Form
     {
+        /// <summary>
+        /// CreditDialog Formunun kurucu metotu.
+        /// </summary>
         public CreditDialog()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// * * * * * * * * * *
+        /// LinkedIn pictureBox unun Click metotu. Tarayicida LinkedIn sayfasina yonlendirir.
+        /// * * * * * * * * * *
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LinkedIn_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo psInfo = new ProcessStartInfo
+            // Process.Start metotuna ProcessStartInfo tipinde link bilgisi gonderiliyor.
+            Process.Start(
+            new ProcessStartInfo
             {
                 FileName = "https://www.linkedin.com/in/beerkaya/",
                 UseShellExecute = true
-            };
-            Process.Start(psInfo);
+            });
         }
 
+        /// <summary>
+        /// * * * * * * * * * *
+        /// Github pictureBox unun Click metotu. Tarayicida Github sayfasina yonlendirir.
+        /// * * * * * * * * * *
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Github_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo psInfo = new ProcessStartInfo
+            // Process.Start metotuna ProcessStartInfo tipinde link bilgisi gonderiliyor.
+            Process.Start(
+            new ProcessStartInfo
             {
                 FileName = "https://github.com/beerkaya",
                 UseShellExecute = true
-            };
-            Process.Start(psInfo);
+            });
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// CreditDialog formunun kapatma butonu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonClose_Click(object sender, EventArgs e)
         {
+            // Bu formun close metotu calistiriliyor.
             this.Close();
         }
     }

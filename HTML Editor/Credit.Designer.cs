@@ -32,7 +32,7 @@ namespace HTML_Editor
             this.NameLabel = new System.Windows.Forms.Label();
             this.Num = new System.Windows.Forms.Label();
             this.creditGroupBox = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.Github = new System.Windows.Forms.Button();
             this.LinkedIn = new System.Windows.Forms.Button();
             this.creditGroupBox.SuspendLayout();
@@ -62,7 +62,7 @@ namespace HTML_Editor
             // 
             // creditGroupBox
             // 
-            this.creditGroupBox.Controls.Add(this.button1);
+            this.creditGroupBox.Controls.Add(this.buttonClose);
             this.creditGroupBox.Controls.Add(this.Github);
             this.creditGroupBox.Controls.Add(this.LinkedIn);
             this.creditGroupBox.Controls.Add(this.Num);
@@ -76,20 +76,20 @@ namespace HTML_Editor
             this.creditGroupBox.TabStop = false;
             this.creditGroupBox.Text = "Credit";
             // 
-            // button1
+            // buttonClose
             // 
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("SansSerif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(909, 23);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(51, 52);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "X";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonClose.FlatAppearance.BorderSize = 0;
+            this.buttonClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
+            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonClose.Font = new System.Drawing.Font("SansSerif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonClose.Location = new System.Drawing.Point(909, 23);
+            this.buttonClose.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(51, 52);
+            this.buttonClose.TabIndex = 4;
+            this.buttonClose.Text = "X";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // Github
             // 
@@ -140,7 +140,7 @@ namespace HTML_Editor
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.Label Num;
         private System.Windows.Forms.GroupBox creditGroupBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button Github;
         private System.Windows.Forms.Button LinkedIn;
     }

@@ -31,6 +31,9 @@ namespace HTML_Editor.Components
         /// </summary>
         private void InitializeComponent()
         {
+            // ***
+            // Komponent bilesenlerinin orneklenmesi
+            // ***
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.File = new System.Windows.Forms.ToolStripMenuItem();
             this.newMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +56,7 @@ namespace HTML_Editor.Components
             this.aboutMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
+
             // 
             // menuStrip
             // 
@@ -235,39 +239,82 @@ namespace HTML_Editor.Components
         #endregion
 
         #region Component Methods
-
+        /// <summary>
+        ///  * * * * * * * * * *
+        /// newMenuStrip in Click eventine eklenen metotu. Yeni bir HTMLEditor formu olusturur.
+        ///  * * * * * * * * * *
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void newMenuStrip_Click(object sender, System.EventArgs e)
         {
+            // ***** Yeni bir HTMLEditor orneklenir ve gosterilir. *****
             new HTMLEditor().Show();
         }
+        /// <summary>
+        ///  * * * * * * * * * *
+        /// openMenuStrip in Click eventine eklenen metotu. File Open islemi yapar.
+        ///  * * * * * * * * * *
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openMenuStrip_Click(object sender, System.EventArgs e)
         {
+            /// * * * * * * * * * *
+            /// OpenFileDialog tipinde bir file nesnesi olusturuluyor ve default dosya tipi ile diger dosya tipleri belirleniyor.
+            /// * * * * * * * * * *
             OpenFileDialog file = new OpenFileDialog();
             file.DefaultExt = "*.html";
             file.Filter = "HTML Files|*.html|Text Files|*.txt|All files|*.*";
+
+            /// * * * * * * * * * *
+            /// result OK ise ve gecerli bir fileName varsa,
+            /// Dialogtan alinan path teki dosya okunur ve richTextBox a yazilir.
+            /// Imleci sona getirmek icin SelectionStart Text in length ine esitlenir.
+            /// * * * * * * * * * *
             if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK && file.FileName.Length > 0)
             {
                 HTMLEdt.richTextBoxX.Text = System.IO.File.ReadAllText(file.FileName).ToString();
                 HTMLEdt.richTextBoxX.SelectionStart = HTMLEdt.richTextBoxX.Text.Length;
 
+                // Kaydetmeyi saglayan menuStrip ve toolStrip false yapilir.
                 this.saveMenuStrip.Enabled = false;
                 HTMLEdt.toolStripX.saveToolStripButton.Enabled = false;
 
+                // isSavedBefore true yapilir ve fileName path degiskenine aktarilir.
                 HTMLEdt.isSavedBefore = true;
                 HTMLEdt.path = file.FileName;
             }
         }
+        /// <summary>
+        /// * * * * * * * * * *
+        /// saveMenuStrip in Click eventine eklenen metotu. File save islemi yapar.
+        /// * * * * * * * * * *
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveMenuStrip_Click(object sender, System.EventArgs e)
         {
+            /// * * * * * * * * * *
+            /// DialogResult tipinde bir result olusturuluyor. Degeri false durumu ifade eden Cancel a esitleniyor.
+            /// SaveFileDialog tipinde bir file nesnesi olusturuluyor ve default dosya tipi ile diger dosya tipleri belirleniyor.
+            /// * * * * * * * * * *
             DialogResult result = DialogResult.Cancel;
 
             SaveFileDialog file = new SaveFileDialog();
             file.DefaultExt = "*.html";
             file.Filter = "HTML Files|*.html|Text Files|*.txt";
 
+            // Dosya daha once kaydedilmediyse saveDialog gosterilir ve kaydedilecek yer kullaniciya sorulur.
             if (!HTMLEdt.isSavedBefore)
             {
+                // Dialogtan donen sonuc result a aktarilir.
                 result = file.ShowDialog();
+
+                /// * * * * * * * * * *
+                /// result OK ise ve gecerli bir fileName varsa,
+                /// isSavedBefore true yapilir ve fileName path degiskenine aktarilir.
+                /// * * * * * * * * * *
                 if (result == System.Windows.Forms.DialogResult.OK && file.FileName.Length > 0)
                 {
                     HTMLEdt.isSavedBefore = true;
@@ -275,15 +322,11 @@ namespace HTML_Editor.Components
                 }
             }
 
-            if (result == System.Windows.Forms.DialogResult.OK && HTMLEdt.path.Length > 0)
-            {
-                System.IO.File.WriteAllText(HTMLEdt.path, HTMLEdt.richTextBoxX.Text.ToString());
-                HTMLEdt.isSaved = true;
-
-                this.saveMenuStrip.Enabled = false;
-                HTMLEdt.toolStripX.saveToolStripButton.Enabled = false;
-            }
-            else if (HTMLEdt.path.Length > 0)
+            /// * * * * * * * * * *
+            /// path degiskeni gecerli bir degere sahipse yazilan text kaydedilir ve isSaved true yapilir.
+            /// Kaydetmeyi saglayan menuStrip ve toolStrip false yapilir.
+            /// * * * * * * * * * *
+            if (HTMLEdt.path.Length > 0)
             {
                 System.IO.File.WriteAllText(HTMLEdt.path, HTMLEdt.richTextBoxX.Text.ToString());
                 HTMLEdt.isSaved = true;
@@ -292,52 +335,143 @@ namespace HTML_Editor.Components
                 HTMLEdt.toolStripX.saveToolStripButton.Enabled = false;
             }
         }
+
+        /// <summary>
+        /// * * * * * * * * * *
+        /// saveAsMenuStrip in Click eventine eklenen metotu. Save As islemini gerceklestirir.
+        /// * * * * * * * * * *
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveAsMenuStrip_Click(object sender, System.EventArgs e)
         {
+            /// * * * * * * * * * *
+            /// SaveFileDialog tipinde bir file nesnesi olusturuluyor ve default dosya tipi ile diger dosya tipleri belirleniyor.
+            /// * * * * * * * * * *
             SaveFileDialog file = new SaveFileDialog();
             file.DefaultExt = "*.html";
             file.Filter = "HTML Files|*.html|Text Files|*.txt";
 
-
+            /// * * * * * * * * * *
+            /// Dialog gosterilip sonuc olarak OK donmesi ve gecerli bir dosya ismi saglanmasi taktirinde if blogu calisiyor.
+            /// * * * * * * * * * *
             if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK && file.FileName.Length > 0)
             {
+                // Belirtilen dosyaya richTextBoxX taki text yaziliyor.
                 System.IO.File.WriteAllText(file.FileName, HTMLEdt.richTextBoxX.Text.ToString());
+
+                // path degiskenine dosyanin path i aktariliyor.
                 HTMLEdt.path = file.FileName;
+
+                // isSaved degiskeni true yapiliyor.
                 HTMLEdt.isSaved = true;
             }
         }
+
+        /// <summary>
+        /// * * * * * * * * * *
+        /// exitMenuStrip in Click eventine eklenen metotu. Formu kapatir.
+        /// * * * * * * * * * *
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exitMenuStrip_Click(object sender, System.EventArgs e)
         {
+            // ***** Formun kapanmasini saglayan metot. *****
             HTMLEdt.Close();
         }
+
+        /// <summary>
+        /// * * * * * * * * * *
+        /// undoMenuStrip in Click eventine eklenen metotu.
+        /// * * * * * * * * * *
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void undoMenuStrip_Click(object sender, System.EventArgs e)
         {
+            // ***** Richtextbox in Undo metotu. *****
             HTMLEdt.richTextBoxX.Undo();
         }
+
+        /// <summary>
+        /// * * * * * * * * * *
+        /// redoMenuStrip in Click eventine eklenen metotu.
+        /// * * * * * * * * * *
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void redoMenuStrip_Click(object sender, System.EventArgs e)
         {
+            // ***** Richtextbox in Redo metotu. *****
             HTMLEdt.richTextBoxX.Redo();
         }
+
+        /// <summary>
+        /// * * * * * * * * * *
+        /// cutMenuStrip in Click eventine eklenen metotu.
+        /// * * * * * * * * * *
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cutMenuStrip_Click(object sender, System.EventArgs e)
         {
+            // ***** Richtextbox in Cut metotu. *****
             HTMLEdt.richTextBoxX.Cut();
         }
+
+        /// <summary>
+        /// * * * * * * * * * *
+        /// copyMenuStrip in Click eventine eklenen metotu.
+        /// * * * * * * * * * *
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void copyMenuStrip_Click(object sender, System.EventArgs e)
         {
+            // ***** Richtextbox in Copy metotu. *****
             HTMLEdt.richTextBoxX.Copy();
         }
+
+        /// <summary>
+        /// * * * * * * * * * *
+        /// pasteMenuStrip in Click eventine eklenen metotu.
+        /// * * * * * * * * * *
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pasteMenuStrip_Click(object sender, System.EventArgs e)
         {
+            // ***** Richtextbox in Paste metotu. *****
             HTMLEdt.richTextBoxX.Paste();
         }
+
+        /// <summary>
+        /// * * * * * * * * * *
+        /// optionsMenuStrip in Click eventine eklenen metotu.          ***** Burada ayarlar kismi eklenecek.. *****
+        /// * * * * * * * * * *
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void optionsMenuStrip_Click(object sender, System.EventArgs e)
         {
+            // ***** Bilgi icin MessageBox. *****
             MessageBox.Show("Daha sonra eklenecek..");
         }
+
+        /// <summary>
+        /// * * * * * * * * * *
+        /// aboutMenuStrip in Click eventine eklenen metotu
+        /// * * * * * * * * * *
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void aboutMenuStrip_Click(object sender, System.EventArgs e)
         {
+            // ***** CreditDialog Formu orneklenip Dialog olarak gosteriliyor. *****
             new CreditDialog().ShowDialog();
         }
+
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip;
