@@ -64,7 +64,7 @@ namespace HTML_Editor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Form1_Load(object sender, EventArgs e)
+        private void HTMLEditor_Load(object sender, EventArgs e)
         {
             // KeywordTable Sinifinin ogeleri orneklenir.
             richTextBoxX.KeywordTable.Keyword = new string[table.GetLength(0)];
@@ -85,16 +85,17 @@ namespace HTML_Editor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Form1_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        private void HTMLEditor_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
             if (!this.isSaved)
             {
                 /// * * * * * * * * * *
-                /// Bir MessageBox olusturuluyor.
-                /// MessageBox tan donen sonuc OK ise if blogu calisiyor.
+                /// Bir MessageBox olusturuluyor. Donen sonuc resultQustion a esitleniyor.
+                /// MessageBox tan donen sonuc YES ise if blogu calisiyor.
                 /// * * * * * * * * * *
+                DialogResult resultQuestion = MessageBox.Show("Do you want to save code?", "Are you Sure?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
-                if(MessageBox.Show("Do you want to save code?", "Are you Sure?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                if (resultQuestion == DialogResult.Yes)
                 {
                     /// * * * * * * * * * *
                     /// DialogResult tipinde bir result olusturuluyor. Degeri false durumu ifade eden Cancel a esitleniyor.
@@ -132,6 +133,11 @@ namespace HTML_Editor
                         System.IO.File.WriteAllText(this.path, this.richTextBoxX.Text.ToString());
                         this.isSaved = true;
                     }
+                }
+                else if(resultQuestion == DialogResult.Cancel)
+                {
+                    // resultQuestion Cancel ise kapatma iptal ediliyor.
+                    e.Cancel = true;
                 }
             }
         }

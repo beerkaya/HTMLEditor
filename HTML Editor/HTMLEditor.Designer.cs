@@ -91,8 +91,8 @@ namespace HTML_Editor
             this.Controls.Add(this.menuStripX);
             this.Name = "HTMLEditor";
             this.Text = "HTML Editor";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.HTMLEditor_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HTMLEditor_FormClosing);
             this.ResumeLayout(false);
 
         }
